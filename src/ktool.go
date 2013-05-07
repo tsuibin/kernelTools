@@ -10,10 +10,10 @@
 // written on: 1 JAN 2012
 //-------------------------------------------------------------------
 
-
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"fmt"
 	"os"
@@ -23,7 +23,7 @@ import (
 
 func main() {
 
-	makeFile, err := os.Create("Makefile")
+	file, err := os.Create("Makefile")
 
 	if err != nil {
 		fmt.Println("Create Makefile error")
@@ -31,6 +31,7 @@ func main() {
 
 	}
 
+	makeFile := bufio.NewWriter(file)
 	makeFile.WriteString("\nifneq\t($(KERNELRELEASE),)")
 	makeFile.WriteString("\nobj-m\t:= ")
 
@@ -72,6 +73,7 @@ func main() {
 	makeFile.WriteString("\n")
 	makeFile.WriteString("\nendif")
 	makeFile.WriteString("\n\n")
+	makeFile.Flush()
 
 	cmd := exec.Command("/usr/bin/make")
 	cmd.Stdin = strings.NewReader("some input")
