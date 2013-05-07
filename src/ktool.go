@@ -1,3 +1,16 @@
+//-------------------------------------------------------------------                                                                                                 
+// ktool.go (An LKM developer's tool for Linux Deepin 12.04)
+//
+// Building and Running Modules
+// This utility compiles the kernel-modules whose source-files
+// reside in the current directory (then cleans up afterward).
+//
+// programmer: Tsuibin
+// email: xubin@linuxdeepin.com
+// written on: 1 JAN 2012
+//-------------------------------------------------------------------
+
+
 package main
 
 import (
