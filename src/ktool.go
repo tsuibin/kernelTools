@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"os"
 	"os/exec"
@@ -59,7 +60,15 @@ func main() {
 	makeFile.WriteString("\nendif")
 	makeFile.WriteString("\n\n")
 
-	mk := exec.Command("ls -l")
-	mk.Start()
+	cmd := exec.Command("/usr/bin/make")
+	cmd.Stdin = strings.NewReader("some input")
+	var out bytes.Buffer
+	cmd.Stdout = &out
+
+	if err := cmd.Run(); err != nil {
+		fmt.Println(err.Error())
+	}
+
+	fmt.Printf(out.String())
 
 }
